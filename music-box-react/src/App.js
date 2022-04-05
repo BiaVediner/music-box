@@ -1,12 +1,12 @@
-import { useState } from 'react';
 import api from './api';
-import Votacao from './pages/Votacao';
+import Musica from './pages/Musica';
+import './html-css-template/css/reset.css'
+import './html-css-template/css/style.css'
 
 function App() {
   return (
     <>
-      <Votacao title="BK"/>
-      <Votacao title="Mc"/>
+      <Musica/>
     </>
   );
 }
