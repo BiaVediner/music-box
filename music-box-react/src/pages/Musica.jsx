@@ -1,7 +1,21 @@
+import { useEffect, useState } from "react";
 import ItemMusica from "../components/ItemMusica";
 import Navbar from "../components/Navbar";
+import api from "../api"
+
 
 export default function Musica(props) {
+    const [musicas, setMusicas] = useState([]);
+
+    useEffect(() => {
+        api.get().then((res) => {
+            console.log(res.data)
+            setMusicas(res.data)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }, [])
+    
     return (
         <>
             <Navbar/>
@@ -13,28 +27,19 @@ export default function Musica(props) {
 
             <div className="container">
                 <div className="music-boxes">
-
-                    <ItemMusica
-                        musica="Get Jinxed"
-                        artista="Imagine Dragons"
-                        genero="Crazy"
-                        ano={2022}
-                        id="1"
-                    />
-                    <ItemMusica
-                        musica="Get Jinxed"
-                        artista="Imagine Dragons"
-                        genero="Crazy"
-                        ano={2022}
-                        id="2"
-                    />
-                    <ItemMusica
-                        musica="In the end"
-                        artista="Linkin Park"
-                        genero="Crazy"
-                        ano={2022}
-                        id="3"
-                    />
+                    {
+                        musicas.map(music => (
+                            <ItemMusica
+                                key={music.id}
+                                musica={music.musica}
+                                artista={music.artista}
+                                genero={music.categoria}
+                                ano={music.ano}
+                                id={music.id}
+                            />
+                        ))
+                    }
+                    
                 </div>
             </div>
         </>
